@@ -1,6 +1,39 @@
-// Export custom module - bind it to a function
-module.exports = test;
+// Import a Node global module, in this case 'filesystem' & 'path'
+var fs = require('fs');
+var path = require('path');
 
-function test() {
-	console.log("hi from module");
+// Export custom module - bind it to a function
+module.exports = readDirModule;
+
+// Design instructions: The module must export a single function that takes three arguments: the directory name, the filename extension string and a callback function, in that order.
+// 
+function readDirModule(targetDir, targetExt, lsCallbackToMain) {
+  var parsedTargetExt = "." + targetExt;
+  console.log(lsCallbackToMain);
+  fs.readdir(targetDir, callbackExecuter(function () {
+    finishedScanningCallback(parsedTargetExt);
+  }));
+  // callback will be triggered once readdir finishes
+}
+
+function callbackExecuter(callback) {
+  callback();
+}
+
+function finishedScanningCallback(error, list, parsedTargetExt) {
+	if (error) {
+		return lsCallbackToMain(error);
+    // If you receive an error, e.g. from your call to  fs.readdir(), the callback must be called with the error, and only the error, as the first argument.
+	} else {
+    var matches = [];
+    // Loop through the file list, retrieve only ones matching ext
+    for (var i = 0; i < list.length; i++) {
+      // JavaScript string comparison
+      if (path.extname(list[i]).localeCompare(parsedTargetExt) == 0) {
+        matches.push(list[i]);
+      }
+    }
+    lsCallbackToMain(null, result);
+    // This convention stipulates that unless there's an error, the first argument passed to the callback will be null, and the second will be your data.
+  }
 }
