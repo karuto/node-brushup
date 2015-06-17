@@ -10,6 +10,10 @@ module.exports = readDirModule;
 function readDirModule(targetDir, targetExt, lsCallbackToMain) {
   var parsedTargetExt = "." + targetExt;
   console.log(lsCallbackToMain);
+
+  // Must use in-line callback style here
+  // i.e. not defining finishedScanningCallback elsewhere
+  // Reason is for easy access to 'parsedTargetExt' variable, otherwise we would have to use closure / anonymous function to pass that in, but we would not be able to due to the special parameter requirement of readdir's callback (i.e. only having error and list as parameters)
   fs.readdir(targetDir, function(error, list) {
     if (error) {
     return lsCallbackToMain(error);
