@@ -8,6 +8,9 @@ var targetExt = process.argv[3]; // 2nd command line argument will supply filter
 lsModule(targetDir, targetExt, lsCallback);
 
 function lsCallback(err, files) {
+  if (err) {
+    return console.log(err);
+  }
   // print files
   for (var i = 0; i < files.length; i++) {
     console.log(files[i]);
