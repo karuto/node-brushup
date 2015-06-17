@@ -9,7 +9,6 @@ module.exports = readDirModule;
 // 
 function readDirModule(targetDir, targetExt, lsCallbackToMain) {
   var parsedTargetExt = "." + targetExt;
-  console.log(lsCallbackToMain);
 
   // Must use in-line callback style here
   // i.e. not defining finishedScanningCallback elsewhere
