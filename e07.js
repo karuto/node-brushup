@@ -2,3 +2,9 @@
 
 var url = process.argv[2]; // 1st command line argument will supply URL
 
+// Perform GET request, 
+http.get(url, callback);
+
+function callback (response) {
+  
+}
