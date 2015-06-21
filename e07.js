@@ -6,5 +6,6 @@ var url = process.argv[2]; // 1st command line argument will supply URL
 http.get(url, callback);
 
 function callback (response) {
-  
+  // 'response' is a Node Stream object, bind event listener to it
+  response.on("data", dataStreamCallback);
 }
