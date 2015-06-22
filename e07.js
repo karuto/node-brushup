@@ -2,10 +2,15 @@
 
 var url = process.argv[2]; // 1st command line argument will supply URL
 
-// Perform GET request, 
+// Perform GET request, callback will be triggered once it receives data
 http.get(url, callback);
 
 function callback (response) {
   // 'response' is a Node Stream object, bind event listener to it
+  // 'data' event is emitted when a chunk of data is available
   response.on("data", dataStreamCallback);
+}
+
+function dataStreamCallback(data) {
+
 }
