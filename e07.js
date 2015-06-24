@@ -14,6 +14,7 @@ function callback (response) {
   response.setEncoding('utf8');
   // 'data' event is emitted when a chunk of data is available
   response.on("data", dataStreamCallback);
+  response.on('error', console.error);
 }
 
 function dataStreamCallback(data) {
