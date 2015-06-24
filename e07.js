@@ -3,7 +3,9 @@
 var url = process.argv[2]; // 1st command line argument will supply URL
 
 // Perform GET request, callback will be triggered once it receives data
-http.get(url, callback);
+http.get(url, callback).on('error', function(e) {
+  console.log("Got error: " + e.message);
+});
 
 function callback (response) {
   // 'response' is a Node Stream object, bind event listener to it
