@@ -10,6 +10,8 @@ http.get(url, callback).on('error', function(e) {
 
 function callback (response) {
   // 'response' is a Node Stream object, bind event listener to it
+  // 'utf8' so that it will emit String rather than standard Node Buffer objects
+  response.setEncoding('utf8');
   // 'data' event is emitted when a chunk of data is available
   response.on("data", dataStreamCallback);
 }
